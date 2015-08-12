@@ -1,11 +1,44 @@
 // Asynchronous Flickr Search
-//
-// Flickr reveals a searchable JSON Feed you can access via jQuery's $.getJSON()
-// method. Use this to allow users to search for a tag or comma-separated list
-// of tags and view the images that are found.
-//
-// Allow users to click the images to see a larger version with more information.
+
 $(document).on('ready', function(){
+	var searchImages = function (tags){
+		var flickrAPI= "http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?";
+		$.getJSON( flickrAPI, {
+			tags: tags,
+			tagmode: "any",
+			format: "json"
+		})	
+		.done(function( data ) {
+			console.log(data);
+			$('#images').empty();
+			$.each( data.items, function( i, item ) {
+				var newListItem = $('<li>');
+				var newTitle = $('<p class="image-title">').html(item.title).appendTo(newListItem);
+				var newDate = $('<p class="image-date">').html(item.date).appendTo(newListItem);
+				var lines = item.description.split('<br />');
+				console.log(lines.length);
+				if(lines.length > 3){
+					lines = lines.slice(0,3);
+					lines[3] = "...";
+				}
+				var newDescription = $('<p class="image-description">').html(lines.join('<br />')).appendTo(newListItem);
+				var newAuthor = $('<p class="image-author">').html(item.author).appendTo(newListItem);
+				var newLink = $ ('<a>').attr('href', item.link).text('View on Flickr').appendTo(newListItem);
+				console.log(newListItem);
+				newListItem.appendTo('#images');
+			});
+		});
+	};
+	$("button.search").on('click', function(event)  {
+		event.preventDefault();
+		var tags = 	$('input[name="searchText"]').val();
+		console.log(tags);
+		searchImages(tags);
+		$('input[name="searchText"]').val("");
+	});
+});
+	
+	
     // Place your code here, inside the document ready handler.
 
     // Create a function called `searchImages()`. This function will handle the
@@ -46,4 +79,3 @@ $(document).on('ready', function(){
 
 
 
-});

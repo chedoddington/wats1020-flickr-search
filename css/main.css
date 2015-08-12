@@ -1,42 +1,37 @@
 /* ==========================================================================
    Author's custom styles
    ========================================================================== */
-
-/* Enable these styles if you wish to go into a grid layout.
-ul#images li {
-    width: 120px;
+#images li {
+    width: 33%;
     height: auto;
+	max-width: 30%;
     display: inline-block;
     position: relative;
-    float: left;
+	padding-left: 1em;
+	padding-top: 5em;
+	vertical-align: top;
 }
 
-ul#images li img {
+#images li img {
     display: inline-block;
     width: 100%;
     height: auto;
 }
 
-ul#images li button {
+#images li button {
     display: inline-block;
 }
 
---- End of grid layout styles. */
-
-ul#images {
+#images {
     list-style-type: none;
 }
 
-ul#images .placeholder {
+#images .placeholder {
     font-size: 2em;
     font-weight: lighter;
     color: #666;
     width: 100%;
     margin: 2em;
-}
-.modal-body img {
-    width: 100%;
-    height: auto;
 }
 
 hr {
@@ -45,8 +40,7 @@ hr {
 
 
 
-
-
+  
 
 
 
